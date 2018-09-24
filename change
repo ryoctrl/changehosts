@@ -1,0 +1,26 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(cd $(dirname "${BASH_SOURCE:-$0}"); pwd)
+echo $SCRIPT_DIR
+
+
+if [ $# -ne 1 ]; then
+    echo "Please host type in first argsment"
+    exit -1
+fi
+
+HOST=${1}
+
+if [ $HOST = "home" ]; then 
+    eval "sudo cp ${SCRIPT_DIR}/homehosts /etc/hosts"
+    echo "set host file to home mode"
+    exit 0
+elif [ $HOST = "other" ]; then
+    eval "sudo cp ${SCRIPT_DIR}/otherhosts /etc/hosts"
+    echo "set host file to others mode"
+    exit 0
+else 
+    echo "please give args \"home\" or \"other\""
+    exit 0
+fi
+
